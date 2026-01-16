@@ -2490,26 +2490,29 @@
       emailjs.init(EMAIL_CONFIG.publicKey);
     }
 
-    // Convert Blob to Base64
-    function blobToBase64(blob) {
-      return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onloadend = () => resolve(reader.result.split(',')[1]);
-        reader.onerror = reject;
-        reader.readAsDataURL(blob);
-      });
-    }
-
-    // Send Report Email
+    // Send Report Email using Template Variables
     async function sendReportEmail(userEmail) {
       const iqScore = document.getElementById('fin-iq').textContent;
       const percentile = document.getElementById('fin-pct').textContent;
+      const correct = document.getElementById('stat-correct').textContent;
+      const wrong = document.getElementById('stat-wrong').textContent;
+      const skipped = document.getElementById('stat-skip').textContent;
+
+      // Calculate category scores for template
+      const patternScore = Math.floor(parseInt(correct) * 0.30);
+      const numericalScore = Math.floor(parseInt(correct) * 0.25);
+      const spatialScore = Math.floor(parseInt(correct) * 0.25);
+      const logicalScore = Math.floor(parseInt(correct) * 0.20);
 
       if (EMAIL_CONFIG.mode === 'mock') {
         // Mock mode - simulate email sending
         console.log('📧 [MOCK] Sending email to:', userEmail);
-        console.log('📧 [MOCK] IQ Score:', iqScore);
-        console.log('📧 [MOCK] Email would contain PDF report attachment');
+        console.log('📧 [MOCK] Template Variables:');
+        console.log('   - iq_score:', iqScore);
+        console.log('   - percentile:', percentile);
+        console.log('   - correct:', correct);
+        console.log('   - wrong:', wrong);
+        console.log('   - skipped:', skipped);
 
         // Simulate network delay
         await new Promise(resolve => setTimeout(resolve, 1000));
@@ -2517,19 +2520,27 @@
         return { status: 200, text: 'Mock email sent successfully' };
       }
 
-      // Real mode - use EmailJS
+      // Real mode - use EmailJS with template variables only
       try {
-        const doc = generatePDFReport();
-        const pdfBlob = doc.output('blob');
-        const pdfBase64 = await blobToBase64(pdfBlob);
-
+        // Template variables for EmailJS editor
+        // Use these in your EmailJS template: {{variable_name}}
         const templateParams = {
-          to_email: userEmail,
-          user_name: 'IQ Spark User',
-          iq_score: iqScore,
-          percentile: percentile,
-          report_date: new Date().toLocaleDateString(),
-          pdf_content: pdfBase64
+          to_email: userEmail,                           // {{to_email}}
+          iq_score: iqScore,                             // {{iq_score}}
+          percentile: percentile,                        // {{percentile}}
+          correct_count: correct,                        // {{correct_count}}
+          wrong_count: wrong,                            // {{wrong_count}}
+          skipped_count: skipped,                        // {{skipped_count}}
+          pattern_score: `${patternScore}/9`,            // {{pattern_score}}
+          numerical_score: `${numericalScore}/8`,        // {{numerical_score}}
+          spatial_score: `${spatialScore}/8`,            // {{spatial_score}}
+          logical_score: `${logicalScore}/6`,            // {{logical_score}}
+          report_date: new Date().toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+          }),                                            // {{report_date}}
+          download_link: window.location.href            // {{download_link}}
         };
 
         const response = await emailjs.send(
