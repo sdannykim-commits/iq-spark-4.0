@@ -1111,6 +1111,151 @@
       margin: 0 auto 20px;
       font-size: 32px
     }
+
+    /* Legal Modals */
+    .legal-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      z-index: 10000;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      overflow-y: auto
+    }
+
+    .legal-modal.active {
+      display: flex
+    }
+
+    .legal-box {
+      background: var(--card);
+      border-radius: 16px;
+      max-width: 600px;
+      width: 100%;
+      max-height: 80vh;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid var(--border);
+      animation: modalSlide 0.3s ease
+    }
+
+    @keyframes modalSlide {
+      from {
+        opacity: 0;
+        transform: translateY(-20px)
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0)
+      }
+    }
+
+    .legal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--border)
+    }
+
+    .legal-header h3 {
+      font-size: 18px;
+      font-weight: 700
+    }
+
+    .legal-close {
+      background: none;
+      border: none;
+      color: var(--muted);
+      font-size: 28px;
+      cursor: pointer;
+      padding: 0;
+      line-height: 1;
+      transition: color 0.2s
+    }
+
+    .legal-close:hover {
+      color: var(--text)
+    }
+
+    .legal-body {
+      padding: 24px;
+      overflow-y: auto;
+      line-height: 1.7;
+      font-size: 14px;
+      color: var(--muted)
+    }
+
+    .legal-body h4 {
+      color: var(--text);
+      font-size: 15px;
+      margin: 20px 0 8px;
+      font-weight: 600
+    }
+
+    .legal-body h4:first-of-type {
+      margin-top: 12px
+    }
+
+    .legal-body p {
+      margin-bottom: 12px
+    }
+
+    .legal-body strong {
+      color: var(--text)
+    }
+
+    .faq-item {
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border)
+    }
+
+    .faq-item:last-child {
+      border-bottom: none
+    }
+
+    .faq-item h4 {
+      color: var(--p);
+      margin-bottom: 8px
+    }
+
+    .support-email {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--p), var(--p2));
+      color: #fff;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s
+    }
+
+    .support-email:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4)
+    }
+
+    @media (max-width: 480px) {
+      .legal-box {
+        max-height: 90vh;
+        border-radius: 12px
+      }
+
+      .legal-header {
+        padding: 16px 20px
+      }
+
+      .legal-body {
+        padding: 20px
+      }
+    }
   </style>
 </head>
 
@@ -1290,10 +1435,182 @@
   </div>
 
   <footer>
-    <div class="f-links"><a href="#">FAQ</a><a href="#">Support</a><a href="terms.html">Terms</a><a
-        href="privacy.html">Privacy</a></div>
-    <p class="tm" style="font-size:11px">© 2025 IQ Spark • Entertainment only</p>
+    <div class="f-links">
+      <a href="#" onclick="openLegalModal('faq'); return false;">FAQ</a>
+      <a href="#" onclick="openLegalModal('support'); return false;">Support</a>
+      <a href="#" onclick="openLegalModal('terms'); return false;">Terms</a>
+      <a href="#" onclick="openLegalModal('privacy'); return false;">Privacy</a>
+    </div>
+    <p class="tm" style="font-size:12px;margin-top:8px">Need help? Contact us: <a href="mailto:iqspark.info@gmail.com"
+        style="color:var(--acc)">iqspark.info@gmail.com</a></p>
+    <p class="tm" style="font-size:11px;margin-top:8px">© 2025 IQ Spark • Entertainment only</p>
   </footer>
+
+  <!-- Legal Modals -->
+  <!-- Terms of Service Modal -->
+  <div id="terms-modal" class="legal-modal">
+    <div class="legal-box">
+      <div class="legal-header">
+        <h3>📜 Terms of Service</h3>
+        <button class="legal-close" onclick="closeLegalModal('terms')">×</button>
+      </div>
+      <div class="legal-body">
+        <p><strong>Last Updated:</strong> January 2025</p>
+
+        <h4>1. Acceptance of Terms</h4>
+        <p>By accessing and using IQ Spark ("the Service"), you agree to be bound by these Terms of Service. If you do
+          not agree, please do not use the Service.</p>
+
+        <h4>2. Service Description</h4>
+        <p>IQ Spark provides an online cognitive assessment tool for entertainment and personal insight purposes only.
+          The Service is NOT a clinical diagnostic tool and should not be used as a substitute for professional
+          psychological evaluation.</p>
+
+        <h4>3. No Guarantee of Accuracy</h4>
+        <p>While we strive to provide meaningful insights, we make NO WARRANTIES regarding the accuracy, reliability, or
+          validity of test results. Results are based on pattern recognition algorithms and should be interpreted as
+          general entertainment only.</p>
+
+        <h4>4. Payment and Refund Policy</h4>
+        <p>The Premium Report is a digital product delivered instantly upon payment. Due to the immediate delivery of
+          digital content, <strong>ALL SALES ARE FINAL AND NON-REFUNDABLE</strong>. By completing payment, you
+          acknowledge and accept this policy.</p>
+
+        <h4>5. Limitation of Liability</h4>
+        <p>IQ Spark and its operators shall not be liable for any direct, indirect, incidental, or consequential damages
+          arising from: (a) use or inability to use the Service; (b) decisions made based on test results; (c) any
+          unauthorized access to your data.</p>
+
+        <h4>6. Intellectual Property</h4>
+        <p>All content, including questions, algorithms, and design, is proprietary. Reproduction or distribution
+          without written consent is prohibited.</p>
+
+        <h4>7. Modifications</h4>
+        <p>We reserve the right to modify these terms at any time. Continued use constitutes acceptance of modified
+          terms.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Privacy Policy Modal -->
+  <div id="privacy-modal" class="legal-modal">
+    <div class="legal-box">
+      <div class="legal-header">
+        <h3>🔒 Privacy Policy</h3>
+        <button class="legal-close" onclick="closeLegalModal('privacy')">×</button>
+      </div>
+      <div class="legal-body">
+        <p><strong>Last Updated:</strong> January 2025</p>
+
+        <h4>1. Information We Collect</h4>
+        <p>We collect: (a) Email address for report delivery; (b) Test responses for result calculation; (c) Payment
+          information processed by our secure payment provider.</p>
+
+        <h4>2. How We Use Your Information</h4>
+        <p>Your email is used to: (a) Deliver your IQ report; (b) Send occasional updates about our services (you may
+          opt-out anytime); (c) Respond to support inquiries.</p>
+
+        <h4>3. Data Security</h4>
+        <p>We implement industry-standard security measures to protect your information. However, no method of
+          electronic transmission is 100% secure, and we cannot guarantee absolute security during data transfer.</p>
+
+        <h4>4. Third-Party Services</h4>
+        <p>Payment processing is handled by secure third-party providers. We do not store your complete payment card
+          information on our servers.</p>
+
+        <h4>5. Data Retention</h4>
+        <p>We retain your email and test results for service delivery purposes. You may request deletion by contacting
+          support.</p>
+
+        <h4>6. Cookies</h4>
+        <p>We may use cookies to improve user experience. You can disable cookies in your browser settings.</p>
+
+        <h4>7. Disclaimer</h4>
+        <p>While we take reasonable measures to protect your data, we are not liable for any data breaches, unauthorized
+          access, or issues arising from third-party services or internet transmission.</p>
+
+        <h4>8. Contact</h4>
+        <p>For privacy inquiries: <a href="mailto:iqspark.info@gmail.com"
+            style="color:var(--acc)">iqspark.info@gmail.com</a></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ Modal -->
+  <div id="faq-modal" class="legal-modal">
+    <div class="legal-box">
+      <div class="legal-header">
+        <h3>❓ Frequently Asked Questions</h3>
+        <button class="legal-close" onclick="closeLegalModal('faq')">×</button>
+      </div>
+      <div class="legal-body">
+        <div class="faq-item">
+          <h4>Q: How long does the test take?</h4>
+          <p>A: The test takes approximately <strong>20 minutes</strong> to complete. You'll have a timer to help you
+            pace yourself through the 30 questions.</p>
+        </div>
+
+        <div class="faq-item">
+          <h4>Q: When will I receive my results?</h4>
+          <p>A: Your Premium Report is delivered <strong>instantly via email</strong> upon payment completion. You can
+            also download it directly from the results page.</p>
+        </div>
+
+        <div class="faq-item">
+          <h4>Q: Is this test scientifically validated?</h4>
+          <p>A: IQ Spark is a <strong>premium cognitive analysis tool</strong> based on pattern recognition principles.
+            It is designed for entertainment and personal insight purposes, not clinical diagnosis. For official IQ
+            assessment, please consult a licensed psychologist.</p>
+        </div>
+
+        <div class="faq-item">
+          <h4>Q: Can I retake the test?</h4>
+          <p>A: Yes! You can take the test multiple times. Each attempt generates a unique set of questions to ensure
+            accurate assessment.</p>
+        </div>
+
+        <div class="faq-item">
+          <h4>Q: What's included in the Premium Report?</h4>
+          <p>A: Your report includes: detailed IQ score, percentile ranking, cognitive category breakdown (Pattern
+            Recognition, Numerical Reasoning, Spatial Intelligence, Logical Analysis), and explanations for all 30
+            questions.</p>
+        </div>
+
+        <div class="faq-item">
+          <h4>Q: Is my payment secure?</h4>
+          <p>A: Absolutely. All payments are processed through secure, PCI-compliant payment providers with 256-bit SSL
+            encryption.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Support Modal -->
+  <div id="support-modal" class="legal-modal">
+    <div class="legal-box">
+      <div class="legal-header">
+        <h3>💬 Support</h3>
+        <button class="legal-close" onclick="closeLegalModal('support')">×</button>
+      </div>
+      <div class="legal-body">
+        <div style="text-align:center;padding:20px 0">
+          <div style="font-size:48px;margin-bottom:16px">📧</div>
+          <h4 style="margin-bottom:12px">Need Help?</h4>
+          <p style="margin-bottom:20px">Our support team is here to assist you with any questions or concerns.</p>
+
+          <div class="support-contact">
+            <p><strong>Email:</strong></p>
+            <a href="mailto:iqspark.info@gmail.com" class="support-email">iqspark.info@gmail.com</a>
+          </div>
+
+          <div style="margin-top:24px;padding:16px;background:rgba(99,102,241,0.1);border-radius:8px">
+            <p style="font-size:13px;color:var(--muted)">We typically respond within 24-48 hours. Please include your
+              order ID (if applicable) for faster assistance.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Payment Modal -->
   <div id="pay-modal" class="pay-modal">
@@ -2319,6 +2636,43 @@
     // Close modal when clicking outside
     document.getElementById('pay-modal').addEventListener('click', function (e) {
       if (e.target === this) closePayModal();
+    });
+
+    // ========== LEGAL MODALS ==========
+    function openLegalModal(type) {
+      const modal = document.getElementById(type + '-modal');
+      if (modal) {
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    function closeLegalModal(type) {
+      const modal = document.getElementById(type + '-modal');
+      if (modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    }
+
+    // Close legal modals when clicking outside
+    ['terms', 'privacy', 'faq', 'support'].forEach(type => {
+      const modal = document.getElementById(type + '-modal');
+      if (modal) {
+        modal.addEventListener('click', function (e) {
+          if (e.target === this) closeLegalModal(type);
+        });
+      }
+    });
+
+    // Close modals with Escape key
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        ['terms', 'privacy', 'faq', 'support'].forEach(type => {
+          closeLegalModal(type);
+        });
+        closePayModal();
+      }
     });
   </script>
 </body>
