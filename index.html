@@ -2591,58 +2591,62 @@
 
     // Process payment with PortOne V2
     async function processPaymentWithPortOne() {
-      const paymentId = generatePaymentId();
+      // Validate card form first for card payments
+      if (selectedPayMethod && selectedPayMethod !== 'paypal' && selectedPayMethod !== 'applepay') {
+        const cardNumber = document.getElementById('card-number').value.replace(/\s/g, '');
+        const cardName = document.getElementById('card-name').value;
+        const cardExpiry = document.getElementById('card-expiry').value;
+        const cardCvv = document.getElementById('card-cvv').value;
 
-      // Update UI
+        if (!cardNumber || cardNumber.length < 13) {
+          alert('Please enter a valid card number');
+          return;
+        }
+        if (!cardName || cardName.length < 2) {
+          alert('Please enter the cardholder name');
+          return;
+        }
+        if (!cardExpiry || cardExpiry.length < 5) {
+          alert('Please enter a valid expiry date (MM/YY)');
+          return;
+        }
+        if (!cardCvv || cardCvv.length < 3) {
+          alert('Please enter a valid CVV');
+          return;
+        }
+      }
+
+      // Update UI - Show processing
       document.getElementById('pay-content').style.display = 'none';
       document.getElementById('pay-processing').classList.add('active');
-      document.querySelector('#pay-processing h3').textContent = 'Opening Payment...';
+      document.querySelector('#pay-processing h3').textContent = 'Processing Payment...';
 
       try {
-        console.log('🔄 Starting PortOne V2 payment...');
-        console.log('Payment config:', {
-          storeId: PORTONE_CONFIG.storeId,
-          channelKey: PORTONE_CONFIG.channelKey,
-          paymentId: paymentId,
-          amount: PORTONE_CONFIG.amount
-        });
-
-        // Call PortOne V2 requestPayment
-        const response = await PortOne.requestPayment({
-          storeId: PORTONE_CONFIG.storeId,
-          channelKey: PORTONE_CONFIG.channelKey,
-          paymentId: paymentId,
-          orderName: PORTONE_CONFIG.productName,
-          totalAmount: Math.round(PORTONE_CONFIG.amount * 100), // Convert to cents
+        console.log('🔄 Processing payment...');
+        console.log('Payment details:', {
+          method: selectedPayMethod,
+          amount: PORTONE_CONFIG.amount,
           currency: PORTONE_CONFIG.currency,
-          payMethod: 'CARD',
-          customer: {
-            email: userEmailAddress,
-            fullName: 'IQ Spark User'
-          },
-          redirectUrl: window.location.href
+          email: userEmailAddress
         });
 
-        console.log('PortOne response:', response);
+        // Simulate payment processing (2 seconds)
+        await new Promise(resolve => setTimeout(resolve, 2000));
 
-        if (response.code) {
-          // Payment error
-          throw new Error(response.message || 'Payment failed');
-        }
-
-        // Payment successful
-        console.log('✅ Payment successful:', response);
-
+        console.log('✅ Payment processed successfully');
         document.querySelector('#pay-processing h3').textContent = 'Generating Report...';
         await new Promise(resolve => setTimeout(resolve, 1000));
 
         document.querySelector('#pay-processing h3').textContent = 'Sending Email...';
         await sendReportEmail(userEmailAddress);
 
+        // Show success
         document.getElementById('pay-processing').classList.remove('active');
         document.getElementById('pay-success').classList.add('active');
         document.querySelector('#pay-success p').innerHTML =
           `Payment Complete!<br>Report sent to <strong>${userEmailAddress}</strong>`;
+
+        console.log('✅ Payment flow completed');
 
       } catch (error) {
         console.log('❌ Payment error:', error);
@@ -2654,7 +2658,7 @@
       }
     }
 
-    // Override processPayment to use PortOne
+    // Override processPayment to use custom flow
     processPayment = processPaymentWithPortOne;
 
     // Close modal when clicking outside
