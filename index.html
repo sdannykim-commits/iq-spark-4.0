@@ -1735,6 +1735,12 @@
           <div id="cat-res"></div>
         </div>
 
+        <!-- Answer Key Grid -->
+        <div class="answer-key-section">
+          <div class="answer-key-title">📝 Answer Key (Q1-Q30)</div>
+          <div class="answer-key-grid" id="answer-key-grid"></div>
+        </div>
+
         <!-- Report Footer -->
         <div class="report-footer">
           <div class="report-footer-logo">⚡ IQ Spark</div>
@@ -2608,8 +2614,44 @@
           </div>
         </div>
       `).join('');
+
+      // Generate Answer Key Grid
+      generateAnswerKeyGrid();
     }
 
+    function generateAnswerKeyGrid() {
+      const labels = ['A', 'B', 'C', 'D', 'E', 'F'];
+      let html = '';
+      qs.forEach((q, i) => {
+        const userAns = ans[i];
+        const isCorrect = userAns === q.correct;
+        const isSkip = userAns === null;
+        let statusClass, resultIcon, detail;
+
+        if (isSkip) {
+          statusClass = 'skip';
+          resultIcon = '—';
+          detail = `Ans: ${labels[q.correct]}`;
+        } else if (isCorrect) {
+          statusClass = 'correct';
+          resultIcon = '✓';
+          detail = labels[userAns];
+        } else {
+          statusClass = 'wrong';
+          resultIcon = '✗';
+          detail = `${labels[userAns]}→${labels[q.correct]}`;
+        }
+
+        html += `
+          <div class="answer-key-item ${statusClass}">
+            <div class="answer-key-num">Q${i + 1}</div>
+            <div class="answer-key-result ${statusClass}">${resultIcon}</div>
+            <div class="answer-key-detail">${detail}</div>
+          </div>
+        `;
+      });
+      document.getElementById('answer-key-grid').innerHTML = html;
+    }
 
 
     // ========== PAYMENT FUNCTIONS ==========
