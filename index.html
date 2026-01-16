@@ -2608,36 +2608,9 @@
           </div>
         </div>
       `).join('');
-
-      // Generate detailed answer review
-      generateAnswerReview();
     }
 
-    function generateAnswerReview() {
-      const labels = ['A', 'B', 'C', 'D', 'E', 'F'];
-      let html = '';
-      qs.forEach((q, i) => {
-        const userAns = ans[i];
-        const isCorrect = userAns === q.correct;
-        const isSkip = userAns === null;
-        let status, statusClass;
-        if (isSkip) { status = 'Skipped'; statusClass = 'skip' }
-        else if (isCorrect) { status = 'Correct'; statusClass = 'correct' }
-        else { status = 'Wrong'; statusClass = 'wrong' }
 
-        html += `<div class="review-item">
-      <div class="review-header">
-        <span class="review-qnum">Q${i + 1}. ${q.type}</span>
-        <span class="review-status ${statusClass}">${status}</span>
-      </div>
-      <div class="review-answer">
-        <b>Correct Answer: ${labels[q.correct]}</b>${!isSkip && !isCorrect ? ` <span class="review-your">(You chose: ${labels[userAns]})</span>` : ''}
-      </div>
-      <div class="review-content" style="margin-top:8px">💡 ${q.explain}</div>
-    </div>`;
-      });
-      document.getElementById('answer-review').innerHTML = html;
-    }
 
     // ========== PAYMENT FUNCTIONS ==========
     let selectedPayMethod = null;
