@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IQ Spark - Your Results</title>
+</head>
+
+<body
+    style="margin:0;padding:0;font-family:'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;background-color:#0f0f1a;">
+    <div
+        style="max-width:600px;margin:0 auto;background-color:#1a1a2e;border-radius:16px;overflow:hidden;margin-top:20px;margin-bottom:20px;">
+
+        <!-- Header -->
+        <div style="background:linear-gradient(135deg,#6366f1,#8b5cf6);padding:32px 24px;text-align:center;">
+            <h1 style="margin:0;color:#ffffff;font-size:28px;font-weight:700;">⚡ IQ Spark</h1>
+            <p style="margin:8px 0 0;color:rgba(255,255,255,0.9);font-size:14px;">Premium IQ Test Results</p>
+        </div>
+
+        <!-- IQ Score Section -->
+        <div style="padding:32px 24px;text-align:center;">
+            <p style="margin:0;color:#94a3b8;font-size:14px;">Your IQ Score</p>
+            <h2
+                style="margin:8px 0;color:#ffffff;font-size:64px;font-weight:800;background:linear-gradient(135deg,#f59e0b,#f97316);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">
+                {{iq_score}}</h2>
+            <div
+                style="display:inline-block;background:rgba(34,197,94,0.15);border:1px solid rgba(34,197,94,0.3);padding:8px 16px;border-radius:20px;">
+                <span style="color:#22c55e;font-size:14px;font-weight:600;">🎯 Top {{percentile}}% of all test
+                    takers</span>
+            </div>
+        </div>
+
+        <!-- Statistics Section -->
+        <div style="padding:0 24px 24px;">
+            <div style="background:rgba(255,255,255,0.05);border-radius:12px;padding:20px;">
+                <h3 style="margin:0 0 16px;color:#ffffff;font-size:16px;font-weight:600;">📊 Test Statistics</h3>
+                <table style="width:100%;border-collapse:collapse;">
+                    <tr>
+                        <td style="padding:8px 0;color:#94a3b8;font-size:14px;">Correct Answers</td>
+                        <td style="padding:8px 0;color:#22c55e;font-size:14px;text-align:right;font-weight:600;">
+                            {{correct_count}} / 30</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:8px 0;color:#94a3b8;font-size:14px;">Wrong Answers</td>
+                        <td style="padding:8px 0;color:#ef4444;font-size:14px;text-align:right;font-weight:600;">
+                            {{wrong_count}}</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:8px 0;color:#94a3b8;font-size:14px;">Skipped</td>
+                        <td style="padding:8px 0;color:#f59e0b;font-size:14px;text-align:right;font-weight:600;">
+                            {{skipped_count}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- Category Breakdown -->
+        <div style="padding:0 24px 24px;">
+            <div style="background:rgba(255,255,255,0.05);border-radius:12px;padding:20px;">
+                <h3 style="margin:0 0 16px;color:#ffffff;font-size:16px;font-weight:600;">🧠 Cognitive Categories</h3>
+                <table style="width:100%;border-collapse:collapse;">
+                    <tr>
+                        <td style="padding:8px 0;color:#94a3b8;font-size:14px;">Pattern Recognition</td>
+                        <td style="padding:8px 0;color:#6366f1;font-size:14px;text-align:right;font-weight:600;">
+                            {{pattern_score}}</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:8px 0;color:#94a3b8;font-size:14px;">Numerical Reasoning</td>
+                        <td style="padding:8px 0;color:#6366f1;font-size:14px;text-align:right;font-weight:600;">
+                            {{numerical_score}}</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:8px 0;color:#94a3b8;font-size:14px;">Spatial Intelligence</td>
+                        <td style="padding:8px 0;color:#6366f1;font-size:14px;text-align:right;font-weight:600;">
+                            {{spatial_score}}</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:8px 0;color:#94a3b8;font-size:14px;">Logical Analysis</td>
+                        <td style="padding:8px 0;color:#6366f1;font-size:14px;text-align:right;font-weight:600;">
+                            {{logical_score}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- CTA Button -->
+        <div style="padding:0 24px 32px;text-align:center;">
+            <a href="{{download_link}}"
+                style="display:inline-block;background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#ffffff;text-decoration:none;padding:14px 32px;border-radius:8px;font-weight:600;font-size:14px;">📄
+                Download Full PDF Report</a>
+        </div>
+
+        <!-- Footer -->
+        <div style="background:rgba(0,0,0,0.3);padding:20px 24px;text-align:center;">
+            <p style="margin:0 0 4px;color:#64748b;font-size:12px;">Report generated on {{report_date}}</p>
+            <p style="margin:0;color:#64748b;font-size:11px;">© 2025 IQ Spark • Entertainment purposes only</p>
+        </div>
+
+    </div>
+</body>
+
+</html>
