@@ -6,10 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>IQ Spark — Premium IQ Test</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <!-- jsPDF for PDF Generation -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-  <!-- EmailJS for Email Delivery -->
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
   <!-- PortOne V2 SDK -->
   <script src="https://cdn.portone.io/v2/browser-sdk.js"></script>
   <style>
@@ -1669,21 +1666,6 @@
     </div>
   </div>
 
-  <!-- EMAIL -->
-  <div id="p-email" class="page">
-    <div class="container" style="padding:40px 16px">
-      <div class="card tc" style="max-width:450px;margin:0 auto">
-        <div style="font-size:40px;margin-bottom:12px">📧</div>
-        <h2>Results Are Ready!</h2>
-        <p class="tm" style="margin-bottom:20px;font-size:14px">Enter email to receive your IQ score.</p>
-        <div class="email-form">
-          <input type="email" id="email" class="email-in" placeholder="your@email.com">
-          <button class="btn btn-p" onclick="submitEmail()">Send Results →</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <!-- PAYWALL -->
   <div id="p-pay" class="page">
     <div class="container" style="padding:24px 16px">
@@ -1757,12 +1739,6 @@
         <div class="answer-key-section">
           <div class="answer-key-title">📝 Answer Key</div>
           <div class="answer-key-grid" id="answer-key-grid"></div>
-        </div>
-
-        <!-- Detailed Explanations (Collapsible) -->
-        <div class="card review-section" style="background:transparent;border:1px solid rgba(99,102,241,0.2)">
-          <h3 style="margin-bottom:16px;font-size:14px;color:#fff">📖 Detailed Explanations</h3>
-          <div id="answer-review"></div>
         </div>
 
         <!-- Report Footer -->
@@ -2563,8 +2539,7 @@
     function startTest() { genQs(); cQ = 0; ans = new Array(30).fill(null); tLeft = 20 * 60; showP('test'); renderQ(); startTimer() }
     function startTimer() { clearInterval(tInt); tInt = setInterval(() => { tLeft--; const m = Math.floor(tLeft / 60), s = tLeft % 60; const el = document.getElementById('timer'); el.textContent = `⏱️ ${m}:${s.toString().padStart(2, '0')}`; el.className = 'timer' + (tLeft <= 30 ? ' danger' : tLeft <= 60 ? ' warn' : ''); if (tLeft <= 0) { clearInterval(tInt); finishTest() } }, 1000) }
     function finishTest() { clearInterval(tInt); showP('proc'); runProc() }
-    function runProc() { const txts = ['Analyzing patterns...', 'Calculating spatial IQ...', 'Evaluating reasoning...', 'Generating score...']; let s = 0; const i = setInterval(() => { s++; document.getElementById('proc-bar').style.width = (s * 25) + '%'; document.getElementById('proc-txt').textContent = txts[Math.min(s - 1, 3)]; if (s >= 4) { clearInterval(i); setTimeout(() => showP('email'), 500) } }, 700) }
-    function submitEmail() { calcRes(); showP('pay') }
+    function runProc() { const txts = ['Analyzing patterns...', 'Calculating spatial IQ...', 'Evaluating reasoning...', 'Generating score...']; let s = 0; const i = setInterval(() => { s++; document.getElementById('proc-bar').style.width = (s * 25) + '%'; document.getElementById('proc-txt').textContent = txts[Math.min(s - 1, 3)]; if (s >= 4) { clearInterval(i); calcRes(); setTimeout(() => showP('pay'), 500) } }, 700) }
 
     function calcRes() {
       let correct = 0, wrong = 0, skip = 0;
