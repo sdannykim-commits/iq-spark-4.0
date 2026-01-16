@@ -840,6 +840,321 @@
       color: var(--err)
     }
 
+    /* Premium Certificate Styles */
+    .report-container {
+      background: linear-gradient(180deg, #0f1629 0%, #1a1d2e 100%);
+      border: 2px solid rgba(99, 102, 241, 0.3);
+      border-radius: 20px;
+      padding: 32px 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .report-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0L60 30L30 60L0 30z' fill='%236366f1' fill-opacity='0.02'/%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+
+    .report-header {
+      text-align: center;
+      margin-bottom: 24px;
+      position: relative;
+    }
+
+    .report-number {
+      background: linear-gradient(135deg, #1a237e, #3949ab);
+      color: #fff;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      display: inline-block;
+      margin-bottom: 12px;
+    }
+
+    .report-date {
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 8px;
+    }
+
+    .seal-container {
+      position: relative;
+      display: inline-block;
+      margin: 24px 0;
+    }
+
+    .seal {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1a237e 0%, #3949ab 50%, #5c6bc0 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      box-shadow: 0 8px 32px rgba(26, 35, 126, 0.4), inset 0 2px 8px rgba(255, 255, 255, 0.1);
+      position: relative;
+    }
+
+    .seal::before {
+      content: '';
+      position: absolute;
+      top: -4px;
+      left: -4px;
+      right: -4px;
+      bottom: -4px;
+      border-radius: 50%;
+      border: 3px solid rgba(245, 158, 11, 0.6);
+    }
+
+    .seal-score {
+      font-size: 42px;
+      font-weight: 800;
+      color: #fff;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .seal-label {
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.8);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-top: 4px;
+    }
+
+    .percentile-badge {
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      color: #000;
+      padding: 8px 20px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 700;
+      display: inline-block;
+      margin-top: 16px;
+    }
+
+    /* Premium Stats */
+    .premium-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin: 24px 0;
+    }
+
+    .premium-stat {
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 16px 12px;
+      text-align: center;
+    }
+
+    .premium-stat-num {
+      font-size: 28px;
+      font-weight: 800;
+    }
+
+    .premium-stat-num.correct {
+      color: #22c55e;
+    }
+
+    .premium-stat-num.wrong {
+      color: #ef4444;
+    }
+
+    .premium-stat-num.skip {
+      color: #94a3b8;
+    }
+
+    .premium-stat-label {
+      font-size: 11px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 4px;
+    }
+
+    /* Premium Category Analysis */
+    .category-section {
+      background: linear-gradient(145deg, rgba(26, 35, 126, 0.1), rgba(45, 52, 54, 0.2));
+      border: 1px solid rgba(99, 102, 241, 0.2);
+      border-radius: 16px;
+      padding: 20px;
+      margin: 24px 0;
+    }
+
+    .category-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .category-item {
+      margin-bottom: 16px;
+    }
+
+    .category-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .category-name {
+      font-size: 13px;
+      color: var(--text);
+    }
+
+    .category-score {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--acc);
+    }
+
+    .category-bar {
+      height: 10px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 5px;
+      overflow: hidden;
+    }
+
+    .category-fill {
+      height: 100%;
+      border-radius: 5px;
+      transition: width 0.8s ease-out;
+    }
+
+    .category-fill.pattern {
+      background: linear-gradient(90deg, #6366f1, #818cf8);
+    }
+
+    .category-fill.numerical {
+      background: linear-gradient(90deg, #f59e0b, #fbbf24);
+    }
+
+    .category-fill.spatial {
+      background: linear-gradient(90deg, #22c55e, #4ade80);
+    }
+
+    .category-fill.logical {
+      background: linear-gradient(90deg, #ef4444, #f87171);
+    }
+
+    /* Answer Key Grid */
+    .answer-key-section {
+      background: rgba(26, 35, 126, 0.1);
+      border: 1px solid rgba(99, 102, 241, 0.2);
+      border-radius: 16px;
+      padding: 20px;
+      margin: 24px 0;
+    }
+
+    .answer-key-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .answer-key-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 8px;
+    }
+
+    @media (max-width: 480px) {
+      .answer-key-grid {
+        grid-template-columns: repeat(5, 1fr);
+      }
+    }
+
+    .answer-key-item {
+      background: rgba(255, 255, 255, 0.03);
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 10px 6px;
+      text-align: center;
+      transition: all 0.2s;
+    }
+
+    .answer-key-item.correct {
+      border-color: rgba(34, 197, 94, 0.5);
+      background: rgba(34, 197, 94, 0.1);
+    }
+
+    .answer-key-item.wrong {
+      border-color: rgba(239, 68, 68, 0.5);
+      background: rgba(239, 68, 68, 0.1);
+    }
+
+    .answer-key-item.skip {
+      border-color: rgba(148, 163, 184, 0.3);
+      background: rgba(148, 163, 184, 0.05);
+    }
+
+    .answer-key-num {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--muted);
+    }
+
+    .answer-key-result {
+      font-size: 16px;
+      margin: 4px 0;
+    }
+
+    .answer-key-result.correct {
+      color: #22c55e;
+    }
+
+    .answer-key-result.wrong {
+      color: #ef4444;
+    }
+
+    .answer-key-result.skip {
+      color: #94a3b8;
+    }
+
+    .answer-key-detail {
+      font-size: 9px;
+      color: var(--muted);
+    }
+
+    /* Report Footer */
+    .report-footer {
+      text-align: center;
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .report-footer-logo {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--p);
+      margin-bottom: 8px;
+    }
+
+    .report-footer-text {
+      font-size: 10px;
+      color: var(--muted);
+    }
+
     footer {
       background: var(--card);
       padding: 20px 16px;
@@ -1390,43 +1705,76 @@
     </div>
   </div>
 
-  <!-- RESULTS WITH ANSWER REVIEW -->
+  <!-- RESULTS WITH PREMIUM CERTIFICATE DESIGN -->
   <div id="p-res" class="page">
     <div class="container" style="padding:24px 16px;max-width:700px">
-      <div class="tc" style="margin-bottom:20px"><span class="badge">✓ Report Unlocked</span>
-        <h1 style="margin-top:12px">Your IQ Report</h1>
-      </div>
-      <div class="res-card" style="margin-bottom:20px">
-        <div style="font-size:48px">🧠</div>
-        <div class="iq-big" id="fin-iq">115</div>
-        <div>Your IQ</div>
-        <div style="margin-top:12px;opacity:.9;font-size:14px">Top <span id="fin-pct">15</span>%</div>
-      </div>
-      <div class="stats" style="margin-bottom:20px">
-        <div class="stat-box">
-          <div class="stat-num" style="color:var(--ok)" id="stat-correct">0</div>
-          <div class="stat-label">Correct</div>
+
+      <!-- Premium Report Container -->
+      <div class="report-container">
+
+        <!-- Report Header -->
+        <div class="report-header">
+          <div class="report-number" id="report-number">#IQS-2026-0001</div>
+          <h1 style="font-size:24px;margin:8px 0">⚡ IQ Spark</h1>
+          <div style="font-size:13px;color:var(--muted)">Premium IQ Test Report</div>
+          <div class="report-date" id="report-date">January 16, 2026</div>
         </div>
-        <div class="stat-box">
-          <div class="stat-num" style="color:var(--err)" id="stat-wrong">0</div>
-          <div class="stat-label">Wrong</div>
+
+        <!-- Official Seal with IQ Score -->
+        <div class="tc">
+          <div class="seal-container">
+            <div class="seal">
+              <div class="seal-score" id="fin-iq">115</div>
+              <div class="seal-label">IQ Score</div>
+            </div>
+          </div>
+          <div class="percentile-badge">🏆 Top <span id="fin-pct">15</span>%</div>
         </div>
-        <div class="stat-box">
-          <div class="stat-num" id="stat-skip">0</div>
-          <div class="stat-label">Skipped</div>
+
+        <!-- Premium Stats -->
+        <div class="premium-stats">
+          <div class="premium-stat">
+            <div class="premium-stat-num correct" id="stat-correct">0</div>
+            <div class="premium-stat-label">Correct</div>
+          </div>
+          <div class="premium-stat">
+            <div class="premium-stat-num wrong" id="stat-wrong">0</div>
+            <div class="premium-stat-label">Wrong</div>
+          </div>
+          <div class="premium-stat">
+            <div class="premium-stat-num skip" id="stat-skip">0</div>
+            <div class="premium-stat-label">Skipped</div>
+          </div>
         </div>
-      </div>
-      <div class="card" style="margin-bottom:20px">
-        <h3 style="margin-bottom:12px;font-size:14px">📊 Category Analysis</h3>
-        <div id="cat-res"></div>
+
+        <!-- Premium Category Analysis -->
+        <div class="category-section">
+          <div class="category-title">📊 Cognitive Category Analysis</div>
+          <div id="cat-res"></div>
+        </div>
+
+        <!-- Answer Key Grid -->
+        <div class="answer-key-section">
+          <div class="answer-key-title">📝 Answer Key</div>
+          <div class="answer-key-grid" id="answer-key-grid"></div>
+        </div>
+
+        <!-- Detailed Explanations (Collapsible) -->
+        <div class="card review-section" style="background:transparent;border:1px solid rgba(99,102,241,0.2)">
+          <h3 style="margin-bottom:16px;font-size:14px;color:#fff">📖 Detailed Explanations</h3>
+          <div id="answer-review"></div>
+        </div>
+
+        <!-- Report Footer -->
+        <div class="report-footer">
+          <div class="report-footer-logo">⚡ IQ Spark</div>
+          <div class="report-footer-text">This report is for entertainment purposes only.</div>
+          <div class="report-footer-text">© 2026 IQ Spark. All rights reserved.</div>
+        </div>
+
       </div>
 
-      <!-- Answer Review Section -->
-      <div class="card review-section">
-        <h3 style="margin-bottom:16px;font-size:16px">📝 Answer Key & Explanations</h3>
-        <div id="answer-review"></div>
-      </div>
-
+      <!-- Action Buttons -->
       <div class="tc" style="margin-top:24px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
         <button class="btn btn-acc" onclick="downloadPDF()">📄 Download PDF</button>
         <button class="btn btn-p" onclick="showP('land')">🔄 Take Again</button>
@@ -2229,12 +2577,108 @@
       document.getElementById('stat-wrong').textContent = wrong;
       document.getElementById('stat-skip').textContent = skip;
 
-      // Category analysis
-      const cats = [{ n: 'Pattern Recognition', s: Math.floor(correct * .3), m: 9 }, { n: 'Numerical Reasoning', s: Math.floor(correct * .25), m: 8 }, { n: 'Spatial Intelligence', s: Math.floor(correct * .25), m: 7 }, { n: 'Logical Analysis', s: Math.floor(correct * .2), m: 6 }];
-      document.getElementById('cat-res').innerHTML = cats.map(c => `<div style="margin-bottom:14px"><div style="display:flex;justify-content:space-between;margin-bottom:4px;font-size:13px"><span>${c.n}</span><span>${c.s}/${c.m}</span></div><div class="prog"><div class="prog-fill" style="width:${(c.s / c.m) * 100}%"></div></div></div>`).join('');
+      // Generate Report Number & Date
+      const reportNum = `#IQS-${new Date().getFullYear()}-${String(Math.floor(Math.random() * 9999)).padStart(4, '0')}`;
+      document.getElementById('report-number').textContent = reportNum;
+      const today = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+      document.getElementById('report-date').textContent = today;
 
-      // Generate answer review
+      // Real Category Analysis based on actual question types
+      // Q1-6: Matrix XOR (Pattern Recognition)
+      // Q7-10: Number Matrix (Numerical Reasoning)
+      // Q11-15: Shape Counting (Spatial Intelligence)
+      // Q16-19: Number Sequence (Numerical Reasoning)
+      // Q20-22: Cube Folding (Spatial Intelligence)
+      // Q23-26: Pattern Completion (Pattern Recognition)
+      // Q27-28: Rotational Logic (Logical Analysis)
+      // Q29-30: Symbol Matrix (Logical Analysis)
+
+      const catScores = {
+        pattern: { correct: 0, total: 10 },    // Q1-6 + Q23-26
+        numerical: { correct: 0, total: 8 },   // Q7-10 + Q16-19
+        spatial: { correct: 0, total: 8 },     // Q11-15 + Q20-22
+        logical: { correct: 0, total: 4 }      // Q27-28 + Q29-30
+      };
+
+      qs.forEach((q, i) => {
+        const isCorrect = ans[i] === q.correct;
+        if (i < 6) { // Q1-6: Matrix XOR -> Pattern
+          if (isCorrect) catScores.pattern.correct++;
+        } else if (i < 10) { // Q7-10: Number Matrix -> Numerical
+          if (isCorrect) catScores.numerical.correct++;
+        } else if (i < 15) { // Q11-15: Shape Counting -> Spatial
+          if (isCorrect) catScores.spatial.correct++;
+        } else if (i < 19) { // Q16-19: Number Sequence -> Numerical
+          if (isCorrect) catScores.numerical.correct++;
+        } else if (i < 22) { // Q20-22: Cube Folding -> Spatial
+          if (isCorrect) catScores.spatial.correct++;
+        } else if (i < 26) { // Q23-26: Pattern Completion -> Pattern
+          if (isCorrect) catScores.pattern.correct++;
+        } else if (i < 28) { // Q27-28: Rotational Logic -> Logical
+          if (isCorrect) catScores.logical.correct++;
+        } else { // Q29-30: Symbol Matrix -> Logical
+          if (isCorrect) catScores.logical.correct++;
+        }
+      });
+
+      const cats = [
+        { n: 'Pattern Recognition', s: catScores.pattern.correct, m: catScores.pattern.total, cls: 'pattern' },
+        { n: 'Numerical Reasoning', s: catScores.numerical.correct, m: catScores.numerical.total, cls: 'numerical' },
+        { n: 'Spatial Intelligence', s: catScores.spatial.correct, m: catScores.spatial.total, cls: 'spatial' },
+        { n: 'Logical Analysis', s: catScores.logical.correct, m: catScores.logical.total, cls: 'logical' }
+      ];
+
+      document.getElementById('cat-res').innerHTML = cats.map(c => `
+        <div class="category-item">
+          <div class="category-header">
+            <span class="category-name">${c.n}</span>
+            <span class="category-score">${c.s}/${c.m}</span>
+          </div>
+          <div class="category-bar">
+            <div class="category-fill ${c.cls}" style="width:${(c.s / c.m) * 100}%"></div>
+          </div>
+        </div>
+      `).join('');
+
+      // Generate Answer Key Grid
+      generateAnswerKeyGrid();
+
+      // Generate detailed answer review
       generateAnswerReview();
+    }
+
+    function generateAnswerKeyGrid() {
+      const labels = ['A', 'B', 'C', 'D', 'E', 'F'];
+      let html = '';
+      qs.forEach((q, i) => {
+        const userAns = ans[i];
+        const isCorrect = userAns === q.correct;
+        const isSkip = userAns === null;
+        let statusClass, resultIcon, detail;
+
+        if (isSkip) {
+          statusClass = 'skip';
+          resultIcon = '—';
+          detail = `Ans: ${labels[q.correct]}`;
+        } else if (isCorrect) {
+          statusClass = 'correct';
+          resultIcon = '✓';
+          detail = labels[userAns];
+        } else {
+          statusClass = 'wrong';
+          resultIcon = '✗';
+          detail = `${labels[userAns]}→${labels[q.correct]}`;
+        }
+
+        html += `
+          <div class="answer-key-item ${statusClass}">
+            <div class="answer-key-num">Q${i + 1}</div>
+            <div class="answer-key-result ${statusClass}">${resultIcon}</div>
+            <div class="answer-key-detail">${detail}</div>
+          </div>
+        `;
+      });
+      document.getElementById('answer-key-grid').innerHTML = html;
     }
 
     function generateAnswerReview() {
@@ -2346,125 +2790,184 @@
       const correct = document.getElementById('stat-correct').textContent;
       const wrong = document.getElementById('stat-wrong').textContent;
       const skipped = document.getElementById('stat-skip').textContent;
+      const reportNumber = document.getElementById('report-number').textContent;
+      const reportDate = document.getElementById('report-date').textContent;
 
-      // Colors
-      const primaryColor = [99, 102, 241];
-      const accentColor = [245, 158, 11];
-      const successColor = [34, 197, 94];
-      const errorColor = [239, 68, 68];
+      // Premium Colors
+      const deepBlue = [26, 35, 126];       // #1a237e
+      const slateGray = [45, 52, 54];       // #2d3436
+      const primary = [99, 102, 241];       // #6366f1
+      const accent = [245, 158, 11];        // #f59e0b
+      const success = [34, 197, 94];        // #22c55e
+      const error = [239, 68, 68];          // #ef4444
+      const muted = [148, 163, 184];        // #94a3b8
 
-      // Header
-      doc.setFillColor(...primaryColor);
-      doc.rect(0, 0, 210, 40, 'F');
+      // Header with Deep Blue gradient effect
+      doc.setFillColor(...deepBlue);
+      doc.rect(0, 0, 210, 45, 'F');
+
+      // Report Number
+      doc.setFillColor(57, 73, 171);
+      doc.roundedRect(75, 8, 60, 8, 4, 4, 'F');
       doc.setTextColor(255, 255, 255);
-      doc.setFontSize(24);
+      doc.setFontSize(8);
       doc.setFont('helvetica', 'bold');
-      doc.text('IQ Spark', 105, 18, { align: 'center' });
-      doc.setFontSize(12);
+      doc.text(reportNumber, 105, 13, { align: 'center' });
+
+      // Title
+      doc.setFontSize(22);
+      doc.text('IQ Spark', 105, 28, { align: 'center' });
+      doc.setFontSize(11);
       doc.setFont('helvetica', 'normal');
-      doc.text('Premium IQ Test Report', 105, 28, { align: 'center' });
+      doc.text('Premium IQ Test Report', 105, 36, { align: 'center' });
+      doc.setFontSize(9);
+      doc.text(reportDate, 105, 43, { align: 'center' });
 
-      // Date
-      doc.setFontSize(10);
-      const today = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-      doc.text(today, 105, 35, { align: 'center' });
-
-      // IQ Score Section
-      doc.setTextColor(0, 0, 0);
+      // IQ Score Section with Seal Design
       doc.setFillColor(248, 250, 252);
-      doc.roundedRect(20, 50, 170, 50, 5, 5, 'F');
+      doc.roundedRect(20, 55, 170, 55, 8, 8, 'F');
 
-      doc.setFontSize(14);
-      doc.setFont('helvetica', 'bold');
-      doc.text('Your IQ Score', 105, 62, { align: 'center' });
+      // Draw seal circle
+      doc.setFillColor(...deepBlue);
+      doc.circle(105, 82, 22, 'F');
+      doc.setDrawColor(...accent);
+      doc.setLineWidth(1.5);
+      doc.circle(105, 82, 25, 'S');
 
-      doc.setTextColor(...primaryColor);
-      doc.setFontSize(48);
+      // IQ Score in seal
+      doc.setTextColor(255, 255, 255);
+      doc.setFontSize(28);
       doc.setFont('helvetica', 'bold');
       doc.text(iqScore, 105, 85, { align: 'center' });
+      doc.setFontSize(8);
+      doc.text('IQ SCORE', 105, 92, { align: 'center' });
 
-      doc.setTextColor(100, 100, 100);
-      doc.setFontSize(12);
-      doc.setFont('helvetica', 'normal');
-      doc.text(`Top ${percentile}% of test takers`, 105, 95, { align: 'center' });
+      // Percentile badge
+      doc.setFillColor(...accent);
+      doc.roundedRect(82, 100, 46, 8, 4, 4, 'F');
+      doc.setTextColor(0, 0, 0);
+      doc.setFontSize(9);
+      doc.setFont('helvetica', 'bold');
+      doc.text(`Top ${percentile}%`, 105, 105.5, { align: 'center' });
 
       // Statistics Section
       doc.setTextColor(0, 0, 0);
-      doc.setFontSize(14);
+      doc.setFontSize(12);
       doc.setFont('helvetica', 'bold');
-      doc.text('Test Statistics', 20, 120);
+      doc.text('Test Statistics', 20, 125);
 
-      // Stat boxes
-      const statY = 130;
+      const statY = 132;
       // Correct
-      doc.setFillColor(...successColor);
-      doc.roundedRect(20, statY, 50, 25, 3, 3, 'F');
+      doc.setFillColor(...success);
+      doc.roundedRect(20, statY, 50, 22, 4, 4, 'F');
       doc.setTextColor(255, 255, 255);
-      doc.setFontSize(18);
-      doc.text(correct, 45, statY + 12, { align: 'center' });
-      doc.setFontSize(10);
-      doc.text('Correct', 45, statY + 20, { align: 'center' });
+      doc.setFontSize(16);
+      doc.text(correct, 45, statY + 10, { align: 'center' });
+      doc.setFontSize(9);
+      doc.text('Correct', 45, statY + 18, { align: 'center' });
 
       // Wrong
-      doc.setFillColor(...errorColor);
-      doc.roundedRect(80, statY, 50, 25, 3, 3, 'F');
-      doc.text(wrong, 105, statY + 12, { align: 'center' });
-      doc.setFontSize(10);
-      doc.text('Wrong', 105, statY + 20, { align: 'center' });
+      doc.setFillColor(...error);
+      doc.roundedRect(80, statY, 50, 22, 4, 4, 'F');
+      doc.setFontSize(16);
+      doc.text(wrong, 105, statY + 10, { align: 'center' });
+      doc.setFontSize(9);
+      doc.text('Wrong', 105, statY + 18, { align: 'center' });
 
       // Skipped
-      doc.setFillColor(148, 163, 184);
-      doc.roundedRect(140, statY, 50, 25, 3, 3, 'F');
-      doc.setFontSize(18);
-      doc.text(skipped, 165, statY + 12, { align: 'center' });
-      doc.setFontSize(10);
-      doc.text('Skipped', 165, statY + 20, { align: 'center' });
+      doc.setFillColor(...muted);
+      doc.roundedRect(140, statY, 50, 22, 4, 4, 'F');
+      doc.setFontSize(16);
+      doc.text(skipped, 165, statY + 10, { align: 'center' });
+      doc.setFontSize(9);
+      doc.text('Skipped', 165, statY + 18, { align: 'center' });
 
-      // Category Analysis
+      // Category Analysis with real scores
       doc.setTextColor(0, 0, 0);
-      doc.setFontSize(14);
+      doc.setFontSize(12);
       doc.setFont('helvetica', 'bold');
-      doc.text('Cognitive Category Analysis', 20, 175);
+      doc.text('Cognitive Category Analysis', 20, 170);
+
+      // Calculate real category scores
+      const catScores = { pattern: 0, numerical: 0, spatial: 0, logical: 0 };
+      qs.forEach((q, i) => {
+        const isCorrect = ans[i] === q.correct;
+        if (i < 6 || (i >= 22 && i < 26)) { if (isCorrect) catScores.pattern++; }
+        else if ((i >= 6 && i < 10) || (i >= 15 && i < 19)) { if (isCorrect) catScores.numerical++; }
+        else if ((i >= 10 && i < 15) || (i >= 19 && i < 22)) { if (isCorrect) catScores.spatial++; }
+        else { if (isCorrect) catScores.logical++; }
+      });
 
       const categories = [
-        { name: 'Pattern Recognition', percent: 30 },
-        { name: 'Numerical Reasoning', percent: 25 },
-        { name: 'Spatial Intelligence', percent: 25 },
-        { name: 'Logical Analysis', percent: 20 }
+        { name: 'Pattern Recognition', score: catScores.pattern, max: 10, color: [99, 102, 241] },
+        { name: 'Numerical Reasoning', score: catScores.numerical, max: 8, color: [245, 158, 11] },
+        { name: 'Spatial Intelligence', score: catScores.spatial, max: 8, color: [34, 197, 94] },
+        { name: 'Logical Analysis', score: catScores.logical, max: 4, color: [239, 68, 68] }
       ];
 
-      let catY = 185;
+      let catY = 178;
       categories.forEach(cat => {
-        const score = Math.floor(parseInt(correct) * cat.percent / 100);
-        const maxScore = Math.ceil(30 * cat.percent / 100);
-        const barWidth = (score / maxScore) * 130;
-
-        doc.setFontSize(10);
+        const barWidth = (cat.score / cat.max) * 130;
+        doc.setFontSize(9);
         doc.setFont('helvetica', 'normal');
         doc.setTextColor(0, 0, 0);
         doc.text(cat.name, 20, catY);
-        doc.text(`${score}/${maxScore}`, 175, catY, { align: 'right' });
+        doc.text(`${cat.score}/${cat.max}`, 175, catY, { align: 'right' });
 
         // Background bar
         doc.setFillColor(230, 230, 230);
-        doc.roundedRect(20, catY + 2, 150, 6, 2, 2, 'F');
+        doc.roundedRect(20, catY + 2, 150, 5, 2, 2, 'F');
 
-        // Progress bar
-        doc.setFillColor(...primaryColor);
-        doc.roundedRect(20, catY + 2, barWidth, 6, 2, 2, 'F');
+        // Progress bar with category color
+        doc.setFillColor(...cat.color);
+        if (barWidth > 0) doc.roundedRect(20, catY + 2, barWidth, 5, 2, 2, 'F');
 
-        catY += 18;
+        catY += 15;
+      });
+
+      // Answer Key Section
+      doc.setTextColor(0, 0, 0);
+      doc.setFontSize(12);
+      doc.setFont('helvetica', 'bold');
+      doc.text('Answer Key', 20, 240);
+
+      const labels = ['A', 'B', 'C', 'D', 'E', 'F'];
+      let keyX = 20, keyY = 248;
+      const boxSize = 9;
+      const gap = 2;
+
+      qs.forEach((q, i) => {
+        const userAns = ans[i];
+        const isCorrect = userAns === q.correct;
+        const isSkip = userAns === null;
+
+        // Box color
+        if (isSkip) doc.setFillColor(...muted);
+        else if (isCorrect) doc.setFillColor(...success);
+        else doc.setFillColor(...error);
+
+        doc.roundedRect(keyX, keyY, boxSize, boxSize, 1, 1, 'F');
+
+        // Question number
+        doc.setTextColor(255, 255, 255);
+        doc.setFontSize(6);
+        doc.setFont('helvetica', 'bold');
+        doc.text(`${i + 1}`, keyX + boxSize / 2, keyY + 5.5, { align: 'center' });
+
+        keyX += boxSize + gap;
+        if ((i + 1) % 15 === 0) { keyX = 20; keyY += boxSize + gap; }
       });
 
       // Footer
-      doc.setFillColor(...primaryColor);
-      doc.rect(0, 270, 210, 27, 'F');
+      doc.setFillColor(...deepBlue);
+      doc.rect(0, 275, 210, 22, 'F');
       doc.setTextColor(255, 255, 255);
       doc.setFontSize(10);
-      doc.text('IQ Spark - Premium IQ Test', 105, 280, { align: 'center' });
-      doc.setFontSize(8);
-      doc.text('This report is for entertainment purposes only.', 105, 287, { align: 'center' });
-      doc.text('© 2025 IQ Spark. All rights reserved.', 105, 293, { align: 'center' });
+      doc.setFont('helvetica', 'bold');
+      doc.text('IQ Spark - Premium IQ Test', 105, 283, { align: 'center' });
+      doc.setFontSize(7);
+      doc.setFont('helvetica', 'normal');
+      doc.text('This report is for entertainment purposes only. © 2026 IQ Spark. All rights reserved.', 105, 290, { align: 'center' });
 
       return doc;
     }
