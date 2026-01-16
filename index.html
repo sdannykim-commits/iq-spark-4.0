@@ -10,8 +10,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <!-- EmailJS for Email Delivery -->
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-  <!-- PortOne (iamport) Payment SDK -->
-  <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+  <!-- PortOne V2 SDK -->
+  <script src="https://cdn.portone.io/v2/browser-sdk.js"></script>
   <style>
     :root {
       --p: #6366f1;
@@ -2557,27 +2557,25 @@
       }
     }
 
-    // ========== PORTONE PAYMENT INTEGRATION ==========
+    // ========== PORTONE V2 PAYMENT INTEGRATION ==========
     let userEmailAddress = '';
 
-    // PortOne Configuration
+    // PortOne V2 Configuration
     const PORTONE_CONFIG = {
-      merchantId: 'imp48642047',
-      pg: 'channel-key-f2ef1344-6050-4ddf-92f5-79358dc1a764', // Eximbay Channel Key
-      payMethod: 'card',
+      storeId: 'store-741d98fb-b635-4c76-9e0f-ce4d628f15cd',
+      channelKey: 'channel-key-f2ef1344-6050-4ddf-92f5-79358dc1a764',
       currency: 'USD',
-      amount: 14.99, // $14.99
+      amount: 14.99,
       productName: 'IQ Spark Premium Report'
     };
 
-    // Initialize PortOne
-    if (typeof IMP !== 'undefined') {
-      IMP.init(PORTONE_CONFIG.merchantId);
-      console.log('✅ PortOne initialized with Merchant ID:', PORTONE_CONFIG.merchantId);
+    // Check PortOne V2 SDK loaded
+    if (typeof PortOne !== 'undefined') {
+      console.log('✅ PortOne V2 SDK loaded');
     }
 
-    // Generate unique order ID
-    function generateOrderId() {
+    // Generate unique payment ID
+    function generatePaymentId() {
       const timestamp = Date.now();
       const random = Math.random().toString(36).substr(2, 9).toUpperCase();
       return `IQS${timestamp}${random}`;
@@ -2591,54 +2589,69 @@
       showP('pay');
     };
 
-    // Process payment with PortOne
+    // Process payment with PortOne V2
     async function processPaymentWithPortOne() {
-      const orderId = generateOrderId();
-      const iqScore = document.getElementById('fin-iq').textContent;
+      const paymentId = generatePaymentId();
 
-      // Close current modal UI first
+      // Update UI
       document.getElementById('pay-content').style.display = 'none';
       document.getElementById('pay-processing').classList.add('active');
       document.querySelector('#pay-processing h3').textContent = 'Opening Payment...';
 
-      // Call PortOne payment
-      IMP.request_pay({
-        pg: PORTONE_CONFIG.pg,
-        pay_method: PORTONE_CONFIG.payMethod,
-        merchant_uid: orderId,
-        name: PORTONE_CONFIG.productName,
-        amount: PORTONE_CONFIG.amount,
-        currency: PORTONE_CONFIG.currency,
-        buyer_email: userEmailAddress,
-        buyer_name: 'IQ Spark User',
-        m_redirect_url: window.location.href // For mobile redirect
-      }, async function (response) {
-        if (response.success) {
-          // Payment successful
-          console.log('✅ Payment successful:', response);
+      try {
+        console.log('🔄 Starting PortOne V2 payment...');
+        console.log('Payment config:', {
+          storeId: PORTONE_CONFIG.storeId,
+          channelKey: PORTONE_CONFIG.channelKey,
+          paymentId: paymentId,
+          amount: PORTONE_CONFIG.amount
+        });
 
-          document.querySelector('#pay-processing h3').textContent = 'Generating Report...';
-          await new Promise(resolve => setTimeout(resolve, 1000));
+        // Call PortOne V2 requestPayment
+        const response = await PortOne.requestPayment({
+          storeId: PORTONE_CONFIG.storeId,
+          channelKey: PORTONE_CONFIG.channelKey,
+          paymentId: paymentId,
+          orderName: PORTONE_CONFIG.productName,
+          totalAmount: Math.round(PORTONE_CONFIG.amount * 100), // Convert to cents
+          currency: PORTONE_CONFIG.currency,
+          payMethod: 'CARD',
+          customer: {
+            email: userEmailAddress,
+            fullName: 'IQ Spark User'
+          },
+          redirectUrl: window.location.href
+        });
 
-          document.querySelector('#pay-processing h3').textContent = 'Sending Email...';
-          await sendReportEmail(userEmailAddress);
+        console.log('PortOne response:', response);
 
-          document.getElementById('pay-processing').classList.remove('active');
-          document.getElementById('pay-success').classList.add('active');
-          document.querySelector('#pay-success p').innerHTML =
-            `Payment Complete!<br>Report sent to <strong>${userEmailAddress}</strong>`;
-
-        } else {
-          // Payment failed or cancelled
-          console.log('❌ Payment failed:', response.error_msg);
-
-          document.getElementById('pay-processing').classList.remove('active');
-          document.getElementById('pay-content').style.display = 'block';
-
-          // Show error message
-          alert('Payment failed: ' + response.error_msg);
+        if (response.code) {
+          // Payment error
+          throw new Error(response.message || 'Payment failed');
         }
-      });
+
+        // Payment successful
+        console.log('✅ Payment successful:', response);
+
+        document.querySelector('#pay-processing h3').textContent = 'Generating Report...';
+        await new Promise(resolve => setTimeout(resolve, 1000));
+
+        document.querySelector('#pay-processing h3').textContent = 'Sending Email...';
+        await sendReportEmail(userEmailAddress);
+
+        document.getElementById('pay-processing').classList.remove('active');
+        document.getElementById('pay-success').classList.add('active');
+        document.querySelector('#pay-success p').innerHTML =
+          `Payment Complete!<br>Report sent to <strong>${userEmailAddress}</strong>`;
+
+      } catch (error) {
+        console.log('❌ Payment error:', error);
+
+        document.getElementById('pay-processing').classList.remove('active');
+        document.getElementById('pay-content').style.display = 'block';
+
+        alert('Payment failed: ' + (error.message || 'Unknown error'));
+      }
     }
 
     // Override processPayment to use PortOne
